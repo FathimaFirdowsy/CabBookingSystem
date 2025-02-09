@@ -1,0 +1,587 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #343a40; /* Dark background color for the navbar */
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Ensures it stays at the top */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensures the navbar stays on top of other content */
+    padding: 10px 0; /* Add some padding for better spacing */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #efb71c; /* Golden color for the brand name */
+    font-size: 1.5rem;
+}
+
+.navbar-brand span {
+    color: #315473; /* Blue color for the 'Book' part */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #f6f7f8; /* Light color for the navbar links */
+    padding: 10px 20px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #efb71c; /* Change link color on hover */
+    text-decoration: underline;
+}
+
+.navbar-nav .nav-item .btn-light {
+    color: #2e3a48; /* Dark text color */
+    background-color: #f6f7f8; /* Light background for the button */
+    border: none;
+}
+
+.navbar-nav .nav-item .btn-light:hover {
+    background-color: #efb71c; /* Change button background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar-nav {
+    margin-left: auto; /* Ensure the login is on the far right */
+}
+
+.navbar-nav .nav-item {
+    margin-left: 15px; /* Space between links */
+}
+
+.navbar .btn-light {
+    background-color: #fff; /* Customize login button background */
+    border-color: #ccc; /* Customize login button border */
+}
+
+/* For making the navbar responsive */
+@media (max-width: 991px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        padding: 8px 10px;
+    }
+}
+
+/* Hero section */
+.hero-wrap {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 2, 2, 0.4); /* Navy blue with low transparency */
+    z-index: 0; /* Overlay stays behind the text */
+}
+
+.text {
+    position: relative;
+    color: white; /* Ensure the text is white */
+    z-index: 1; /* Text will be in front of the overlay */
+}
+
+
+.hero .btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 18px;
+    background-color: #efb71c !important;/* Golden Button color */
+    border: none;
+    text-decoration: none; /* Prevent underline on button */
+}
+
+.hero .btn:hover {
+    background-color: rgb(255, 168, 0); /* Slightly darker shade for hover */
+}
+
+.subheading {
+    font-size: 20px;
+    font-weight: 500;
+    color: white; /* Ensures the subheading text is white */
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #efb71c !important; /* Golden Yellow Button color */
+    height: 40px;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #e0a900 !important; /* Slightly darker shade for hover effect */
+}
+
+
+
+.feature-box {
+  background-color: #f6f7f8; /* Updated feature box background color */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Book Now Section Styling */
+.book-now {
+  padding: 60px 0;
+  background-color: #315473; /* Deep blue background */
+  color: white;
+  border-radius: 10px; /* Rounded corners for the section */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for modern look */
+  margin-bottom: 50px;
+}
+
+.book-now h2 {
+  font-size: 2.8rem; /* Larger heading */
+  font-weight: 600;
+  color: #f6f7f8; /* Light color for heading */
+}
+
+.book-now p {
+  font-size: 1.1rem;
+  color: #f6f7f8; /* Light color for paragraph */
+  margin-bottom: 30px;
+}
+
+/* Form Input fields */
+.book-now .form-input {
+  max-width: 500px; /* Set a fixed width for the form inputs */
+  margin: 0 auto; /* Center the input fields */
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.book-now .form-input:focus {
+  border-color: #efb71c; /* Highlight border color on focus */
+  box-shadow: 0 0 5px rgba(239, 183, 28, 0.5); /* Slight glow effect */
+}
+
+/* Button Styling */
+.book-now .btn-primary {
+  background-color: #efb71c; /* Yellow button color */
+  color: white;
+  padding: 8px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px; /* Rounded button */
+  transition: all 0.3s ease;
+  display: inline-block; /* Ensure button stays inline */
+  text-align: center; /* Center the text inside the button */
+}
+
+.book-now .btn-primary:hover {
+  background-color: #dba00f; /* Slightly darker yellow on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767px) {
+  .book-now {
+    padding: 40px 15px;
+  }
+
+  .book-now h2 {
+    font-size: 2rem;
+  }
+
+  .book-now p {
+    font-size: 1rem;
+  }
+
+  .book-now .form-input {
+    font-size: 1rem;
+    padding: 12px;
+    max-width: 100%; /* Make inputs take full width on smaller screens */
+  }
+
+  .book-now .btn-primary {
+    font-size: 1.1rem;
+    padding: 12px 30px;
+  }
+}
+
+
+
+/* FAQ Section Styling */
+.faq {
+    background-color: #315473; /* Blue background */
+    color: white;
+    padding: 50px 0;
+}
+
+.faq h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: white;
+}
+
+.faq p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #f6f7f8;
+}
+
+.card-header {
+    background-color: #2e3a48; /* Darker background for headers */
+}
+
+.btn-link {
+    color: white; /* White text for the button */
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #efb71c; /* Golden color on hover */
+}
+
+.card-body {
+    background-color: #2e3a48; /* Dark background for content */
+    color: #f6f7f8; /* Light text color */
+}
+
+
+/* Driver Section Styling */
+.driver-section {
+  margin-top: 50px;
+  padding: 6em 0;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.driver-intro .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  background: #315473;
+  z-index: 1;
+}
+
+/* Center align the text */
+.driver-intro .container {
+  position: relative;
+  z-index: 2;
+}
+
+.driver-intro .heading-section-white h2 {
+  color: #fff; /* White text color for the header */
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Shadow for better visibility on the image */
+}
+
+/* Button style */
+.driver-intro .btn-outline-light {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  border-radius: 30px; /* Rounded button */
+}
+
+.driver-intro .btn-outline-light:hover {
+  background-color: #fff;
+  color: #315473; /* Darker blue color for text on hover */
+  border-color: #315473;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 767.98px) {
+  .driver-intro .heading-section-white h2 {
+    font-size: 1.8rem; /* Smaller font on mobile */
+  }
+
+  .driver-intro .btn-outline-light {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+  }
+}
+
+
+/* Testimonial Section */
+.testimonials {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #315473;
+    margin-bottom: 40px;
+}
+
+.testimonial-content {
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.testimonial-content:hover {
+    transform: translateY(-10px); /* Hover effect */
+}
+
+.testimonial-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #315473;
+}
+
+.testimonial-role {
+    font-size: 1rem;
+    color: #315473;
+}
+
+/* Owl Carousel Styles */
+.owl-carousel .item {
+    padding: 15px;
+}
+
+.owl-carousel .owl-nav {
+    display: none; /* Hide navigation arrows */
+}
+
+.owl-carousel .owl-dots {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.owl-carousel .owl-dots .owl-dot {
+    background-color: #f0f0f0;
+    margin: 0 5px;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+}
+
+.owl-carousel .owl-dots .owl-dot.active {
+    background-color: #315473; /* Active dot color */
+}
+
+/* About Us Section */
+.about-us {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.about-us .card {
+  border: none;
+  border-radius: 8px;
+}
+
+.about-us .card-body {
+  background-color: #ffffff;
+}
+
+.about-us h1 {
+  font-size: 3rem;
+  color: #315473;
+}
+
+.about-us p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Vision and Mission Cards */
+.card-img-top {
+  border-radius: 8px;
+  height: 250px;
+  object-fit: cover;
+}
+
+
+/* Offers Section */
+.offers {
+  padding: 80px 0;
+}
+
+.offers h1 {
+  font-size: 3rem;
+  color: #315473;
+}
+
+.offers .lead {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card img {
+  border-bottom: 2px solid #efb71c;
+  object-fit: cover;
+  height: 250px;
+}
+
+.card-body {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card .btn-warning {
+  background-color: #efb71c;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.card .btn-warning:hover {
+  background-color: #dba00f;
+  color: white;
+}
+
+
+/* Footer Styling */
+.footer {
+  background-color: #343a40; /* Dark background for the footer */
+  color: #f6f7f8; /* Light text color */
+  padding: 40px 0;
+  font-size: 14px;
+}
+
+.footer .menu {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.footer .menu li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.footer .menu li a {
+  color: #f6f7f8; /* Light color for links */
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.footer .menu li a:hover {
+  color: #efb71c; /* Golden color on hover */
+  text-decoration: underline;
+}
+
+/* About Mega Cabs */
+.footer .col-md-4 h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #efb71c; /* Golden color for heading */
+}
+
+.footer .col-md-4 p {
+  font-size: 14px;
+  color: #f6f7f8;
+}
+
+/* Social media icons */
+.footer .social-icons {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Center align icons */
+}
+
+.footer .social-icons li {
+  margin-right: 15px;
+}
+
+.footer .social-icons li a {
+  font-size: 30px;
+  color: #f6f7f8;
+  transition: color 0.3s ease;
+}
+
+.footer .social-icons li a:hover {
+  color: #efb71c; /* Golden color on hover */
+}
+
+.footer .text-center {
+  font-size: 14px;
+}
+
+.footer .text-center p {
+  margin-bottom: 0;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 767px) {
+  .footer {
+    padding: 20px 0;
+  }
+
+  .footer .menu {
+    text-align: center;
+  }
+
+  .footer .menu li {
+    margin-bottom: 10px;
+  }
+
+  .footer .social-icons {
+    justify-content: center;
+  }
+
+  .footer .col-md-4 p {
+    font-size: 13px;
+  }
+}
+
+
+.copy a {
+    color: #efb71c;
+    text-decoration: none;
+}
+
+.copy a:hover {
+    color: #315473; /* Golden color on hover */
+}
+
