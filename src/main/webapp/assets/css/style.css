@@ -1,7 +1,5 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f8f9fa;
-    color: #333;
 }
 
 /* Navbar styling */
@@ -70,21 +68,26 @@ body {
 }
 
 /* Hero section */
-
-.hero-section {
-    background: url('../images/cab_image.jpg') center/cover no-repeat;
-    height: 500px;
+.hero-wrap {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 2, 2, 0.4); /* Navy blue with low transparency */
+    z-index: 0; /* Overlay stays behind the text */
+}
 
 .text {
     position: relative;
@@ -122,6 +125,8 @@ body {
 .btn-primary:hover {
     background-color: #e0a900 !important; /* Slightly darker shade for hover effect */
 }
+
+
 
 .feature-box {
   background-color: #f6f7f8; /* Updated feature box background color */
@@ -248,8 +253,8 @@ body {
 }
 
 .card-body {
-    background-color: white; /* Dark background for content */
-    color: darkgrey; /* Light text color */
+    background-color: #2e3a48; /* Dark background for content */
+    color: #f6f7f8; /* Light text color */
 }
 
 
@@ -476,256 +481,6 @@ body {
 }
 
 
-/* Login Section */
-.login-section {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Fixed height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent overlay */
-}
-
-/* Ensure the body covers the full screen with background */
-body {
-    background-image: url('assets/images/login_bg.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh; /* Ensures full height */
-    margin: 0;
-    padding: 0;
-}
-
-.card {
-    border: none;
-    border-radius: 10px;
-}
-
-.card-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-label {
-    font-weight: 500;
-    color: #333;
-}
-
-.form-control {
-    border-radius: 8px;
-    box-shadow: none;
-    font-size: 1rem;
-    padding: 10px 15px;
-}
-
-.form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-/* Forgot password and signup link styles */
-.text-primary {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.text-primary:hover {
-    text-decoration: underline;
-}
-
-/* Button styling */
-.btn-primary {
-    background-color: #0d6efd;
-    padding: 8px;
-    font-size: 1.1rem;
-    border-radius: 50px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive design */
-@media (max-width: 767px) {
-    .card-body {
-        padding: 20px;
-    }
-
-    .btn-primary {
-        font-size: 1rem;
-    }
-
-    .form-control {
-        font-size: 0.9rem;
-    }
-}
-
-
-/* Register Section */
-.register-section {
-    background-color: #fff;
-    padding: 60px 0;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.card {
-    border: none;
-    border-radius: 10px;
-}
-
-.card-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-label {
-    font-weight: 500;
-    color: #333;
-}
-
-.form-control {
-    border-radius: 8px;
-    box-shadow: none;
-    font-size: 1rem;
-    padding: 10px 15px;
-}
-
-.form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-/* signup link styles */
-.text-primary {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.text-primary:hover {
-    text-decoration: underline;
-}
-
-/* Button styling */
-.btn-primary {
-    background-color: #0d6efd;
-    padding: 8px;
-    font-size: 1.1rem;
-    border-radius: 50px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive design */
-@media (max-width: 767px) {
-    .card-body {
-        padding: 20px;
-    }
-
-    .btn-primary {
-        font-size: 1rem;
-    }
-
-    .form-control {
-        font-size: 0.9rem;
-    }
-}
-
-
-.help-section {
-      padding: 50px 0;
-      
-    }
-       
-    .contact-card {
-      background: #f2f2f2;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-info i {
-      font-size: 24px;
-      color: #0d6efd;
-      margin-right: 10px;
-    }
-
-    .form-control {
-      border-radius: 8px;
-      padding: 12px;
-    }
-
-    .btn-submit {
-      background-color: #0d6efd;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50px;
-    }
-
-    .steps-section {
-      background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .step i {
-      font-size: 28px;
-      color: #0d6efd;
-      margin-right: 15px;
-    }
-    
-
- /* Booking Section */
-.booking-section {
-    padding: 50px 0;
-}
-
-.cab-list .cab-card {
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    margin: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.cab-list .cab-card:hover {
-    border-color: #007bff;
-    transform: scale(1.05);
-}
-
-.btn-primary {
-    background-color: #ff8c00;
-    border: none;
-    font-weight: bold;
-}
-
-.btn-primary:hover {
-    background-color: #e67e22;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-section {
-        height: 200px;
-        font-size: 1.2rem;
-    }
-}
-    
 /* Footer Styling */
 .footer {
   background-color: #343a40; /* Dark background for the footer */
