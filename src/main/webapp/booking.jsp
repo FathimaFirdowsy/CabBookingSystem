@@ -123,7 +123,39 @@
         </div>
     </section>
 
-    
+    <!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Booking Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center" id="modalBody">
+        <!-- Searching Animation -->
+        <div id="searchingSection">
+          <i class="fa fa-spinner fa-spin fa-3x"></i>
+          <p class="mt-3">Searching for a cab...</p>
+        </div>
+        
+        <!-- Booking Details Section (Initially Hidden) -->
+        <div id="bookingDetails" class="d-none">
+          <h5>Booking Confirmed!</h5>
+          <p><strong>Booking ID:</strong> <span id="bookingId">123456</span> <button class="btn btn-sm btn-outline-primary" onclick="copyBookingId()">Copy</button></p>
+          <p><strong>Cab Name:</strong> <span id="cabName"></span></p>
+          <p><strong>Driver Name:</strong> <span id="driverName"></span></p>
+          <p><strong>License Number:</strong> <span id="licenseNumber"></span></p>
+          <p><strong>Fare:</strong> <span id="fare"></span></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
  
   <!-- Footer Section -->
@@ -205,7 +237,56 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+document.getElementById("bookingForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent default form submission
 
+  // Get form data
+  const formData = new FormData(this);
+
+  // Show the modal
+  var bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
+  bookingModal.show();
+  
+  // Simulate searching for a cab (2 seconds delay)
+  setTimeout(function() {
+    document.getElementById("searchingSection").classList.add("d-none"); // Hide searching
+    document.getElementById("bookingDetails").classList.remove("d-none"); // Show details
+    
+    // Simulated fetched details (Replace with real data from backend)
+    fetch("process_booking.jsp", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("bookingId").textContent = data.bookingId;
+      document.getElementById("cabName").textContent = data.cabName;
+      document.getElementById("driverName").textContent = data.driverName;
+      document.getElementById("licenseNumber").textContent = data.licenseNumber;
+      document.getElementById("fare").textContent = data.fare;
+    })
+    .catch(error => console.error("Error:", error));
+  }, 2000);
+});
+
+// Function to copy booking ID
+function copyBookingId() {
+  var bookingIdText = document.getElementById("bookingId").textContent;
+  navigator.clipboard.writeText(bookingIdText).then(() => {
+    alert("Booking ID copied to clipboard!");
+  });
+}
+</script>
+
+<style>
+  .modal-body p {
+    font-size: 18px;
+  }
+  .fa-spinner {
+    color: #007bff;
+  }
+</style>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
