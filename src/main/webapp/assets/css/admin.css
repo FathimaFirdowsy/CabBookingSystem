@@ -1,0 +1,122 @@
+
+.body{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Admin Login Page Styling */
+body.admin-login-bg {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.admin-login-card h2 {
+    color: #16213e;
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: #0f3460;
+    border: none;
+    transition: 0.3s;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #16213e;
+}
+
+.btn-outline-secondary {
+    border-radius: 8px;
+}
+
+.input-group .btn {
+    border-radius: 0 8px 8px 0;
+}
+
+.text-decoration-none {
+    color: #0f3460;
+    font-weight: bold;
+}
+
+.text-decoration-none:hover {
+    color: #16213e;
+}
+
+/*dashboard*/
+
+#wrapper {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.sidebar .sidebar-header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.sidebar ul {
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    list-style: none;
+    padding: 15px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+}
+
+.sidebar ul li:hover {
+    background-color: #495057;
+}
+
+#page-content-wrapper {
+    margin-left: 250px;
+    padding: 20px;
+    width: 100%;
+}
+
+#menu-toggle {
+    border: none;
+    background: none;
+    font-size: 24px;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
