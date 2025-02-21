@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -43,40 +45,41 @@
                             <h3 class="card-title text-center mb-4">Create an Account</h3>
                             
                             <!-- Register Form -->
-                            <form action="#" method="POST">
+                            <form action="${pageContext.request.contextPath}/Register" method="POST" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label for="nic" class="form-label">NIC</label>
-                                    <input type="text" class="form-control" id="nic" placeholder="Enter your NIC" required>
+                                    <input type="text" class="form-control" id="nic" name="nic"  placeholder="Enter your NIC" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                                    <small id="passwordError" class="text-danger"></small> <!-- Error message -->
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="contact" class="form-label">Contact</label>
-                                    <input type="text" class="form-control" id="contact" placeholder="Enter your contact number" required>
+                                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter your contact number" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address</label>
-                                    <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                                    <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
                                 </div>
 
                                 <div class="d-flex justify-content-between">
@@ -86,6 +89,16 @@
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary w-100">Register</button>
                                 </div>
+                                <br>
+                                <% String errorMessage = request.getParameter("error"); %>
+                                <% if (errorMessage != null) { %>
+                                    <div class="alert alert-danger"><%= errorMessage %></div>
+                                <% } %>
+
+                                <% String successMessage = request.getParameter("success"); %>
+                                <% if (successMessage != null) { %>
+                                    <div class="alert alert-success"><%= successMessage %></div>
+                                <% } %>
                             </form>
                         </div>
                     </div>
@@ -94,6 +107,31 @@
         </div>
     </section>
 
+    
+    <script>
+        
+     function validateForm() {
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let errorMessage = document.getElementById("passwordError");
+
+        if (password !== confirmPassword) {
+            errorMessage.textContent = "Your password and confirm password do not match!";
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+    
+    // Display success message if redirected with success flag
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        alert("You have successfully registered! Please login to enjoy our services.");
+        window.location.href = "login.jsp"; // Redirect to login page after closing the alert
+    }
+    </script>
+
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

@@ -4,7 +4,22 @@
     Author     : Admin
 --%>
 
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
+
+<%
+   
+    Integer userId = (Integer) session.getAttribute("userId"); // Retrieve UserID from the session
+    String username = (String) session.getAttribute("username"); // Retrieve Username from the session
+%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +54,7 @@
  <!-- START nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Mega<span>Cabs</span></a>
+            <a class="navbar-brand" href="index.jsp">Mega<span>Cabs</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -47,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Left side links -->
                 <ul class="navbar-nav ms-auto"> <!-- Align left side links -->
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
                     <li class="nav-item"><a href="booking.jsp" class="nav-link">Booking</a></li>
                     <li class="nav-item"><a href="help.jsp" class="nav-link">Help</a></li>
@@ -72,7 +87,7 @@
         <div class="row no-gutters slider-text justify-content-center align-items-center">
           <div class="col-lg-8 ftco-animate">
             <div class="text w-100 text-center mb-md-5 pb-md-5">
-                <h1 class="mb-4" style="font-size: 50px">Your Journey with Kangaroo Cabs Starts Here</h1>
+                <h1 class="mb-4" style="font-size: 50px">Your Journey with Mega Cabs Starts Here</h1>
               <p style="font-size: 24px;">Your safety and comfort is our concern</p>
             </div>
           </div>
@@ -86,15 +101,67 @@
             <div class="row">
                 <!-- Cab Selection -->
                 <div class="col-md-6">
-                    <h3>Select a Vehicle</h3>
-                    <div class="cab-list row" id="cabList">
-                        <!-- Cabs will be loaded dynamically here -->
+                    <h3>Select a Cab</h3>
+                    <div class="row" id="cabList">
+                        <!-- Cabs -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-sm border-0">
+                                <img src="assets/images/cab1.jpg" alt="Toyota Highlander" class="card-img-top" style="height: 180px; object-fit: contain; width: 100%;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title fw-bold">Suzuki</h5>
+                                    <p class="mb-1"><strong>Type:</strong> Sedan</p>
+                                    <p class="mb-1"><strong>Seats:</strong> 4</p>
+                                    <p class="text-muted">Spacious and comfortable for long trips.</p>
+                                    <button class="btn btn-primary w-100 mt-2" onclick="selectCab(1)">Select</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-sm border-0">
+                                <img src="assets/images/cab2.jpg" alt="Toyota Prius" class="card-img-top" style="height: 180px; object-fit: contain; width: 100%;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title fw-bold">Toyota Prius</h5>
+                                    <p class="mb-1"><strong>Type:</strong> Economy</p>
+                                    <p class="mb-1"><strong>Seats:</strong> 4</p>
+                                    <p class="text-muted">Perfect for budget-friendly city rides.</p>
+                                    <button class="btn btn-primary w-100 mt-2" onclick="selectCab(2)">Select</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-sm border-0">
+                                <img src="assets/images/cab4.jpg" alt="Mercedes-Benz" class="card-img-top" style="height: 180px; object-fit: contain; width: 100%;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title fw-bold">Mercedes-Benz</h5>
+                                    <p class="mb-1"><strong>Type:</strong> Luxury</p>
+                                    <p class="mb-1"><strong>Seats:</strong> 4</p>
+                                    <p class="text-muted">A high-end ride with top-class comfort and amenities.</p>
+                                    <button class="btn btn-primary w-100 mt-2" onclick="selectCab(3)">Select</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-sm border-0">
+                                <img src="assets/images/cab5.jpg" alt="Toyota Sienna" class="card-img-top" style="height: 180px; object-fit: contain; width: 100%;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title fw-bold">Toyota Sienna</h5>
+                                    <p class="mb-1"><strong>Type:</strong> Mini Van</p>
+                                    <p class="mb-1"><strong>Seats:</strong> 6</p>
+                                    <p class="text-muted">Spacious and comfortable, perfect for group or family trips.</p>
+                                    <button class="btn btn-primary w-100 mt-2" onclick="selectCab(4)">Select</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Booking Form -->
                 <div class="col-md-6">
                     <form id="bookingForm">
+                            <input type="hidden" id="userId" value="<%= userId != null ? userId : "" %>">
                         <div class="mb-3">
                             <label for="pickup" class="form-label">Pickup Location</label>
                             <input type="text" class="form-control" id="pickup" placeholder="Enter Pickup Location" required>
@@ -207,88 +274,8 @@
         </div>
       </div>
     </footer>   
-    
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const cabData = [
-        { id: 1, model: "Toyota Prius", icon: "fa-car", description: "Hybrid, 4 seats, AC" },
-        { id: 2, model: "Suzuki Alto", icon: "fa-taxi", description: "Compact, 4 seats, Budget" },
-        { id: 3, model: "Nissan Serena", icon: "fa-bus", description: "Minivan, 7 seats, Family" },
-        { id: 4, model: "BMW 5 Series", icon: "fa-star", description: "Luxury, 4 seats, Premium" }
-    ];
-
-    const cabListContainer = document.getElementById("cabList");
-
-    cabData.forEach(cab => {
-        const cabElement = document.createElement("div");
-        cabElement.classList.add("col-md-3", "cab-card");
-        cabElement.innerHTML = `
-            <i class="fa ${cab.icon} fa-3x"></i>
-            <h5>${cab.model}</h5>
-            <p>${cab.description}</p>
-        `;
-        cabElement.addEventListener("click", () => selectCab(cab.model));
-        cabListContainer.appendChild(cabElement);
-    });
-
-    function selectCab(model) {
-        alert(`You selected ${model}`);
-    }
-});
-</script>
-
-<script>
-document.getElementById("bookingForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevent default form submission
-
-  // Get form data
-  const formData = new FormData(this);
-
-  // Show the modal
-  var bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
-  bookingModal.show();
-  
-  // Simulate searching for a cab (2 seconds delay)
-  setTimeout(function() {
-    document.getElementById("searchingSection").classList.add("d-none"); // Hide searching
-    document.getElementById("bookingDetails").classList.remove("d-none"); // Show details
-    
-    // Simulated fetched details (Replace with real data from backend)
-    fetch("process_booking.jsp", {
-      method: "POST",
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("bookingId").textContent = data.bookingId;
-      document.getElementById("cabName").textContent = data.cabName;
-      document.getElementById("driverName").textContent = data.driverName;
-      document.getElementById("licenseNumber").textContent = data.licenseNumber;
-      document.getElementById("fare").textContent = data.fare;
-    })
-    .catch(error => console.error("Error:", error));
-  }, 2000);
-});
-
-// Function to copy booking ID
-function copyBookingId() {
-  var bookingIdText = document.getElementById("bookingId").textContent;
-  navigator.clipboard.writeText(bookingIdText).then(() => {
-    alert("Booking ID copied to clipboard!");
-  });
-}
-</script>
-
-<style>
-  .modal-body p {
-    font-size: 18px;
-  }
-  .fa-spinner {
-    color: #007bff;
-  }
-</style>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+ 
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
   <!-- JavaScript & Bootstrap -->
@@ -302,5 +289,146 @@ function copyBookingId() {
   <!-- Link to Custom JavaScript -->
   <script src="assets/js/script.js"></script> 
 
+  
+<script>
+ let selectedCabID = null;
+
+// JavaScript to retrieve the user ID (from the hidden input or directly from the session)
+var userId = document.getElementById("userId").value;
+
+// Function to handle cab selection
+function selectCab(cabID) {
+    selectedCabID = cabID;
+    alert("Cab ID " + cabID + " selected!");
+}
+
+// Form submission for booking
+document.getElementById("bookingForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Check if cab is selected
+    if (selectedCabID == null) {
+        alert("Please select a cab first!");
+        return;
+    }
+
+    // Ensure that userId is not null or undefined
+    if (userId == null || userId === "") {
+        alert("User not logged in!");
+        return;  // Stop the form submission
+    }
+
+    // Create a FormData object
+    const formData = new FormData(this);
+    formData.append("userId", userId);  // Add userId to the form data
+    formData.append("cabID", selectedCabID);  // Add cabID to the form data
+
+    // Check if offer is provided, and append it only if it's not null or empty
+    const offer = document.getElementById("offer").value;
+    if (offer && offer.trim() !== "") {
+        formData.append("offer", offer);  // Add offer to the form data if present
+    } else {
+        formData.append("offer", "");  // Ensure offer is appended, even if empty
+    }
+
+    // Send the booking data to the backend for processing (before showing the modal)
+    fetch("BookingConfirmationServlet", {
+        method: "POST",
+         headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'  // Ensure it's not multipart/form-data
+    },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();  // Parse JSON response
+    })
+    .then(data => {
+        if (data.status === "success") {
+            // After receiving bookingConfirmId, open modal with booking details
+            const bookingConfirmId = data.bookingConfirmId;
+            openBookingModal(bookingConfirmId);  // Open modal and fetch further details for the booking
+        } else {
+            alert("There was an issue processing your booking. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error("Error during booking:", error);
+        // Show a user-friendly error message
+        alert("There was an error processing your booking. Please try again later.");
+    });
+});
+
+// Function to open the booking modal with the booking details
+function openBookingModal(bookingConfirmId) {
+    // Send the bookingConfirmId to fetch further details from BookingServlet
+    fetch("BookingServlet", {
+        method: "POST",
+        body: JSON.stringify({ bookingConfirmId: bookingConfirmId }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Show the modal after the data has been processed
+        if (data.status === "success") {
+            var bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
+            bookingModal.show();
+
+            // Update modal with booking details (you can customize this based on your backend response)
+            document.getElementById("bookingId").textContent = data.bookingId || "N/A";  // Assuming backend sends this info
+            document.getElementById("cabName").textContent = data.cabName || "N/A";
+            document.getElementById("driverName").textContent = data.driverName || "N/A";
+            document.getElementById("licenseNumber").textContent = data.licenseNumber || "N/A";
+            document.getElementById("fare").textContent = data.fare || "N/A";
+
+            // Hide the searching animation and show booking details
+            document.getElementById("searchingSection").classList.add("d-none");
+            document.getElementById("bookingDetails").classList.remove("d-none");
+        } else {
+            alert("No booking details found. Please try again later.");
+        }
+    })
+    .catch(error => {
+        console.error("Error during fetching booking details:", error);
+        // Show a user-friendly error message
+        alert("There was an error fetching the booking details. Please try again later.");
+    });
+}
+
+// Function to copy booking ID
+function copyBookingId() {
+    var bookingIdText = document.getElementById("bookingId").textContent;
+    navigator.clipboard.writeText(bookingIdText).then(() => {
+        alert("Booking ID copied to clipboard!");
+    }).catch(error => {
+        console.error("Error copying booking ID:", error);
+        alert("There was an error copying the Booking ID.");
+    });
+}
+
+
+</script>
+
+
+
+<style>
+  .modal-body p {
+    font-size: 18px;
+  }
+  .fa-spinner {
+    color: #007bff;
+  }
+</style>
+
+ 
 </body>
 </html>

@@ -4,8 +4,15 @@
     Author     : USER
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String username = (String) session.getAttribute("username");
+    Integer userId = (Integer) session.getAttribute("userId");
 
+%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +55,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Left side links -->
                 <ul class="navbar-nav ms-auto"> <!-- Align left side links -->
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
                     <li class="nav-item"><a href="booking.jsp" class="nav-link">Booking</a></li>
                     <li class="nav-item"><a href="help.jsp" class="nav-link">Help</a></li>
@@ -56,10 +63,18 @@
                 </ul>
 
                 <!-- Right side links (Login button) -->
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="login.jsp" class="btn btn-light">Login</a>
-                    </li>
+                 <ul class="navbar-nav">
+                    <% if (userId == null) { %>
+                        <!-- If user is not logged in, show Login button -->
+                        <li class="nav-item">
+                            <a href="login.jsp" class="btn btn-light">Login</a>
+                        </li>
+                    <% } else { %>
+                        <!-- If user is logged in, show My Account button -->
+                        <li class="nav-item">
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</button>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
@@ -108,6 +123,30 @@
       </div>
     </section>
 
+    
+     <!-- Booking History Section -->
+    <section id="bookingHistory" class="booking-history-section mt-5">
+      <div class="container">
+        <h3 class="text-center">Your Booking History</h3>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Pickup Location</th>
+                <th>Drop Location</th>
+                <th>Ride Fare</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookingHistoryTable">
+              <tr><td colspan="5" class="text-center">Loading booking history...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
       
       
     <!-- Footer Section -->
@@ -158,9 +197,59 @@
           <p>&copy; 2025 - Mega Cabs. All rights reserved.</p>
         </div>
       </div>
-    </footer>   
+    </footer> 
+    
+    
+          <!-- User Account Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel">My Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Displaying Username and UserId from session -->
+                <p><strong>Username:</strong> <%= username %></p>
+                <p><strong>User ID:</strong> <%= userId %></p>
+                
+                <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+                <p><strong>Contact Number:</strong> <span id="userContact">Loading...</span></p>
+                <p><strong>Address:</strong> <span id="userAddress">Loading...</span></p>
+            </div>
+            <div class="modal-footer">
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+    
     
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        fetch("/api/getBookingHistory")
+          .then(response => response.json())
+          .then(data => {
+            let tableBody = document.getElementById("bookingHistoryTable");
+            tableBody.innerHTML = "";
+            data.forEach(booking => {
+              let row = `<tr>
+                <td>${booking.id}</td>
+                <td>${booking.date}</td>
+                <td>${booking.pickup}</td>
+                <td>${booking.drop}</td>
+                <td>${booking.fare}</td>
+                <td>${booking.status}</td>
+              </tr>`;
+              tableBody.innerHTML += row;
+            });
+          })
+          .catch(error => console.error("Error loading booking history:", error));
+      });
+    </script>
+    
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   

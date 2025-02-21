@@ -120,3 +120,107 @@ body.admin-login-bg {
 .modal-content {
     border-radius: 10px;
 }
+
+
+/* Background */
+.driver-login-bg {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Login Card */
+.driver-login-card {
+    width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+/* Form Styling */
+.driver-login-card .form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.driver-login-card .form-control {
+    border-radius: 5px;
+}
+
+.driver-login-card .btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-weight: 500;
+}
+
+.driver-login-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Password Visibility Toggle */
+.driver-login-card .input-group .btn {
+    border: none;
+    background-color: #f1f1f1;
+}
+
+.driver-login-card .input-group .btn:hover {
+    background-color: #ddd;
+}
+
+
+/* Background */
+.driver-register-bg {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Registration Card */
+.driver-register-card {
+    width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+/* Form Styling */
+.driver-register-card .form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.driver-register-card .form-control, 
+.driver-register-card .form-select {
+    border-radius: 5px;
+}
+
+.driver-register-card .btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-weight: 500;
+}
+
+.driver-register-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Password Visibility Toggle */
+.driver-register-card .input-group .btn {
+    border: none;
+    background-color: #f1f1f1;
+}
+
+.driver-register-card .input-group .btn:hover {
+    background-color: #ddd;
+}
+
+/* Sign In Link */
+.driver-register-card p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.driver-register-card p a:hover {
+    text-decoration: underline;
+}

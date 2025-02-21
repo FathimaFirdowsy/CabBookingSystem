@@ -1,3 +1,14 @@
+<%-- 
+    Document   : admin_dashboard
+    Created on : Mar 3, 2025, 10:46:06 PM
+    Author     : USER
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +40,7 @@
                 <h4>Mega City Cab</h4>
             </div>
             <ul class="list-unstyled components">
-                <li><a href="#" onclick="loadContent('driverManagement')"><i class="fa-solid fa-user-tie"></i> Driver Management</a></li>
+                <li><a href="admin_driver_management.jsp" onclick="loadContent('driverManagement')"><i class="fa-solid fa-user-tie"></i> Driver Management</a></li>
                 <li><a href="#" onclick="loadContent('userManagement')"><i class="fa-solid fa-users"></i> User Management</a></li>
                 <li><a href="#" onclick="loadContent('bookingManagement')"><i class="fa-solid fa-taxi"></i> Booking Management</a></li>
                 <li><a href="#" onclick="loadContent('customerReviews')"><i class="fa-solid fa-star"></i> Customer Reviews</a></li>
@@ -83,15 +94,39 @@
             document.querySelector(".sidebar").classList.toggle("d-none");
         });
 
-        // Function to load dynamic content (Replace with actual API calls)
-        function loadContent(section) {
-            document.getElementById("main-content").innerHTML = `<h2 class="text-center">${section.replace(/([A-Z])/g, ' $1')}</h2><p class="text-center">Content for ${section} will be loaded dynamically.</p>`;
+                function loadContent(section) {
+            // Ensure the section is properly formatted
+            const formattedSection = section.replace(/([A-Z])/g, ' $1'); // Adds spaces before uppercase letters
+
+            // Update the inner HTML with dynamic content
+            document.getElementById("main-content").innerHTML = `
+                <h2 class="text-center">${formattedSection}</h2>
+                <p class="text-center">Content for ${formattedSection} will be loaded dynamically.</p>
+            `;
         }
 
         // Open Profile Modal
         function openProfileModal() {
             new bootstrap.Modal(document.getElementById('profileModal')).show();
         }
+        
+        
+         // Ensure user is authenticated
+        window.onload = function() {
+            fetch("${pageContext.request.contextPath}/AdminDashboardServlet")
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        // Redirect to login if not authenticated
+                        window.location.href = "/admin_login.jsp"; // Update path to your login page
+                    }
+                })
+                .catch(error => {
+                    console.error("Error verifying admin:", error);
+                    window.location.href = "/admin_login.jsp";
+                });
+        };
+        
     </script>
 
 </body>

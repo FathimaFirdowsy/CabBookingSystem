@@ -693,6 +693,11 @@ body {
        padding: 50px 0;
    }
 
+   .cab-card {
+    display: block !important;
+    visibility: visible !important;
+    }
+   
    .cab-list .cab-card {
        border: 2px solid #ddd;
        border-radius: 10px;
@@ -773,6 +778,75 @@ body {
       font-size: 18px;
       color: #666;
     }
+
+    /* Booking History Section */
+.booking-history-section {
+    margin-top: 50px;
+    padding: 40px 0;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.booking-history-section h3 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.booking-history-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.booking-history-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.booking-history-card:hover {
+    transform: scale(1.02);
+}
+
+.booking-history-card h5 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #007bff;
+}
+
+.booking-history-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.booking-history-card span {
+    font-weight: 500;
+    color: #000;
+}
+
+/* Loader for booking history */
+.loader {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loader i {
+    font-size: 24px;
+    color: #007bff;
+    animation: spin 1s linear infinite;
+}
+
+/* Animation for loader */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 

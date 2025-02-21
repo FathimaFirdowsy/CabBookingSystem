@@ -1,3 +1,19 @@
+<%-- 
+    Document   : login_success
+    Created on : Feb 21, 2025, 11:34:32 PM
+    Author     : USER
+--%>
+
+<% 
+    String username = (String) session.getAttribute("username");
+    Integer userId = (Integer) session.getAttribute("userId");
+%>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +22,7 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/cab_icon.png" />
-  <title>Home | Mega Cabs</title>
+  <title>Welcome Home | Mega Cabs</title>
   
   <!-- CDN link Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -32,24 +48,35 @@
         <div class="container">
             <a class="navbar-brand" href="index.html">Mega<span>Cabs</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
+                <span class="navbar-toggler-icon"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Left side links -->
                 <ul class="navbar-nav ms-auto"> <!-- Align left side links -->
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
+                    <% if (userId != null) { %>
                     <li class="nav-item"><a href="booking.jsp" class="nav-link">Booking</a></li>
+                    <% } %>
                     <li class="nav-item"><a href="help.jsp" class="nav-link">Help</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 </ul>
 
-                <!-- Right side links (Login button) -->
+                
+                
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="login.jsp" class="btn btn-light">Login</a>
-                    </li>
+                    <% if (userId == null) { %>
+                        <!-- If user is not logged in, show Login button -->
+                        <li class="nav-item">
+                            <a href="login.jsp" class="btn btn-light">Login</a>
+                        </li>
+                    <% } else { %>
+                        <!-- If user is logged in, show My Account button -->
+                        <li class="nav-item">
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</button>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
@@ -113,10 +140,10 @@
       <div class="container">
         <h2 class="mb-4">Book Your Ride Now</h2>
         <p class="mb-5">Fill in your details below to book your next ride.</p>
-        <form action="login.html" method="GET"> <!-- Redirect to login page -->
-          <input type="text" class="form-control mb-3 form-input" placeholder="Your Name" required>
-          <input type="text" class="form-control mb-3 form-input" placeholder="Pick-Up Location" required>
-          <input type="text" class="form-control mb-3 form-input" placeholder="Drop-Off Location" required>
+        <form action="<%= (userId == null) ? "login.jsp" : "booking.jsp" %>" method="GET"> <!-- Redirect to login page -->
+          <input type="text" class="form-control mb-3 form-input" placeholder="Your Name">
+          <input type="text" class="form-control mb-3 form-input" placeholder="Pick-Up Location">
+          <input type="text" class="form-control mb-3 form-input" placeholder="Drop-Off Location">
           <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
         </form>
       </div>
@@ -205,7 +232,7 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-8 text-center heading-section heading-section-white ftco-animate">
                         <h2 class="mb-4">Do You Want To Earn With Us? Become a Driver Today!</h2>
-                            <a href="driver-register.html" class="btn btn-outline-light btn-lg">Become A Driver</a>
+                            <a href="Admin/driver_register.jsp" class="btn btn-outline-light btn-lg">Become A Driver</a>
                     </div>
                 </div>
             </div>
@@ -307,7 +334,32 @@
       </div>
     </footer>
     
-    
+  
+      <!-- User Account Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel">My Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Displaying Username and UserId from session -->
+                <p><strong>Username:</strong> <%= username %></p>
+                <p><strong>User ID:</strong> <%= userId %></p>
+                
+                <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+                <p><strong>Contact Number:</strong> <span id="userContact">Loading...</span></p>
+                <p><strong>Address:</strong> <span id="userAddress">Loading...</span></p>
+            </div>
+            <div class="modal-footer">
+                <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                      
     
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -337,6 +389,34 @@
             autoplayHoverPause: true
         });
     });
+    
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    fetchUserDetails();
+});
+
+function fetchUserDetails() {
+    fetch('GetUserDetailsServlet') // Calls the servlet to fetch user details
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error fetching user details:', data.error);
+                // Handle errors here (optional)
+            } else {
+                // Populate the modal with user details
+                document.getElementById('userEmail').textContent = data.email || 'N/A';
+                document.getElementById('userContact').textContent = data.contact || 'N/A';
+                document.getElementById('userAddress').textContent = data.address || 'N/A';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user details:', error);
+            // Optional: Show a message in the modal or elsewhere
+        });
+}
+
+
+
 </script>
 
 </body>

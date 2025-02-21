@@ -45,17 +45,17 @@
                             <h3 class="card-title text-center mb-4">Login to Mega Cabs</h3>
                             
                             <!-- Login Form -->
-                            <form action="#" method="POST">
+                            <form action="${pageContext.request.contextPath}/Login" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                                 </div>
-                                
+
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="showPassword">
                                     <label class="form-check-label" for="showPassword">Show Password</label>
@@ -65,10 +65,20 @@
                                     <a href="#" class="text-primary">Forgot Password?</a>
                                     <a href="register.jsp" class="text-primary">Don't have an account? Sign Up</a>
                                 </div>
-                                
+
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary w-100">Login</button>
                                 </div>
+                                <br>
+                                <% String errorMessage = request.getParameter("error"); %>
+                                <% if (errorMessage != null) { %>
+                                    <div class="alert alert-danger"><%= errorMessage %></div>
+                                <% } %>
+
+                                <% String successMessage = request.getParameter("success"); %>
+                                <% if (successMessage != null) { %>
+                                    <div class="alert alert-success"><%= successMessage %></div>
+                                <% } %>
                             </form>
                         </div>
                     </div>

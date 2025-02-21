@@ -8,4 +8,168 @@
             30
         </session-timeout>
     </session-config>
+
+ <!-- Register Servlet -->
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Login Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    
+     <!-- Logout Servlet -->
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- GetUserDetailsServlet -->
+    <servlet>
+        <servlet-name>GetUserDetailsServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.GetUserDetailsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetUserDetailsServlet</servlet-name>
+        <url-pattern>/GetUserDetailsServlet</url-pattern>
+    </servlet-mapping>
+  
+  
+    <!-- CabDetailsServlet -->
+    <servlet>
+        <servlet-name>CabDetailsServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.CabDetailsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CabDetailsServlet</servlet-name>
+        <url-pattern>/CabDetailsServlet</url-pattern>
+    </servlet-mapping>
+    
+   <!-- SubmitQueryServlet -->
+    <servlet>
+        <servlet-name>SubmitQueryServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.SubmitQueryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SubmitQueryServlet</servlet-name>
+        <url-pattern>/SubmitQueryServlet</url-pattern>
+    </servlet-mapping>
+  
+    <!-- AddCabServlet -->
+    <servlet>
+        <servlet-name>AddCabServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.AddCabServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCabServlet</servlet-name>
+        <url-pattern>/AddCabServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- CabServlet -->
+    <servlet>
+        <servlet-name>CabServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.CabServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CabServlet</servlet-name>
+        <url-pattern>/CabServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- BookingConfirmationServlet -->
+    <servlet>
+        <servlet-name>BookingConfirmationServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.BookingConfirmationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BookingConfirmationServlet</servlet-name>
+        <url-pattern>/BookingConfirmationServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- BookingServlet -->
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.BookingServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    <!-- AdminLoginServlet -->
+    <servlet>
+    <servlet-name>AdminLoginServlet</servlet-name>
+    <servlet-class>com.megacabs.bookingsystem.servlets.AdminLoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/AdminLoginServlet</url-pattern>  <!-- Ensure this matches the fetch URL -->
+    </servlet-mapping>
+
+    
+    <!-- AdminDashboardServlet -->
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.AdminDashboardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/AdminDashboardServlet</url-pattern>
+    </servlet-mapping>
+   
+   
+   <!-- DriverManagementServlet -->
+    <servlet>
+        <servlet-name>DriverManagementServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.DriverManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DriverManagementServlet</servlet-name>
+        <url-pattern>/DriverManagementServlet</url-pattern>
+    </servlet-mapping>
+   
+   <!-- CreateDriverServlet -->
+    <servlet>
+        <servlet-name>CreateDriverServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.CreateDriverServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateDriverServlet</servlet-name>
+        <url-pattern>/CreateDriverServlet</url-pattern>
+    </servlet-mapping>
+   
+    <!-- Welcome File -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

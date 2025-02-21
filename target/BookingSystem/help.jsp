@@ -4,6 +4,11 @@
     Author     : Admin
 --%>
 
+<%
+    String username = (String) session.getAttribute("username");
+    Integer userId = (Integer) session.getAttribute("userId");
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -49,18 +54,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Left side links -->
                 <ul class="navbar-nav ms-auto"> <!-- Align left side links -->
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="offers.html" class="nav-link">Offers</a></li>
+                     <% if (userId != null) { %>
                     <li class="nav-item"><a href="booking.jsp" class="nav-link">Booking</a></li>
+                    <% } %>
                     <li class="nav-item"><a href="help.jsp" class="nav-link">Help</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 </ul>
 
                 <!-- Right side links (Login button) -->
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="login.jsp" class="btn btn-light">Login</a>
-                    </li>
+                    <% if (userId == null) { %>
+                        <!-- If user is not logged in, show Login button -->
+                        <li class="nav-item">
+                            <a href="login.jsp" class="btn btn-light">Login</a>
+                        </li>
+                    <% } else { %>
+                        <!-- If user is logged in, show My Account button -->
+                        <li class="nav-item">
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</button>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
@@ -97,7 +112,7 @@
           <div class="contact-card">
             <h3 class="text-primary">Leave Us a Message</h3>
             <hr>
-            <form action="submit_query.jsp" method="POST">
+            <form action="${pageContext.request.contextPath}/SubmitQueryServlet" method="POST">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
@@ -115,6 +130,23 @@
 
               <button type="submit" class="btn btn-submit w-100">Submit</button>
             </form>
+              <br>
+                <%
+                    String successMsg = request.getParameter("success");
+                    String errorMsg = request.getParameter("error");
+                %>
+
+                <% if (successMsg != null) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= successMsg %>
+                    </div>
+                  
+                <% } else if (errorMsg != null) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= errorMsg %>
+                    </div>
+                <% } %>
+              
           </div>
         </div>
       </div>
