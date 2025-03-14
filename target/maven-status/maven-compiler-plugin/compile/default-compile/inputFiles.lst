@@ -16,6 +16,7 @@ C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\ja
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\CabServlet.java
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\CreateDriverServlet.java
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\DriverManagementServlet.java
+C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\DriverRegisterServlet.java
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\GetUserDetailsServlet.java
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\LoginServlet.java
 C:\Users\USER\Documents\NetBeansProjects\BookingSystem\BookingSystem\src\main\java\com\megacabs\bookingsystem\servlets\LogoutServlet.java

@@ -168,6 +168,18 @@
         <url-pattern>/CreateDriverServlet</url-pattern>
     </servlet-mapping>
    
+   <!-- DriverRegisterServlet -->
+    <servlet>
+        <servlet-name>DriverRegisterServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.DriverRegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DriverRegisterServlet</servlet-name>
+        <url-pattern>/DriverRegisterServlet</url-pattern>
+    </servlet-mapping>
+   
+   
     <!-- Welcome File -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
