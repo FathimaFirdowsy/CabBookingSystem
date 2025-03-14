@@ -53,6 +53,17 @@
         <url-pattern>/GetUserDetailsServlet</url-pattern>
     </servlet-mapping>
   
+    <!-- GetCabModelsServlet -->
+    <servlet>
+        <servlet-name>GetCabModelsServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.GetCabModelsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetCabModelsServlet</servlet-name>
+        <url-pattern>/GetCabModelsServlet</url-pattern>
+    </servlet-mapping>
+  
   
     <!-- CabDetailsServlet -->
     <servlet>
@@ -177,6 +188,28 @@
     <servlet-mapping>
         <servlet-name>DriverRegisterServlet</servlet-name>
         <url-pattern>/DriverRegisterServlet</url-pattern>
+    </servlet-mapping>
+   
+     <!-- DriverLoginServlet -->
+    <servlet>
+        <servlet-name>DriverLoginServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.DriverLoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DriverLoginServlet</servlet-name>
+        <url-pattern>/DriverLoginServlet</url-pattern>
+    </servlet-mapping>
+   
+    <!-- DriverLogoutServlet -->
+    <servlet>
+        <servlet-name>DriverLogoutServlet</servlet-name>
+        <servlet-class>com.megacabs.bookingsystem.servlets.DriverLogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DriverLogoutServlet</servlet-name>
+        <url-pattern>/DriverLogoutServlet</url-pattern>
     </servlet-mapping>
    
    

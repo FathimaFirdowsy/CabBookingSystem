@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.mindrot.jbcrypt.BCrypt; // Import BCrypt
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "DriverRegisterServlet", urlPatterns = {"/DriverRegisterServlet"})
 public class DriverRegisterServlet extends HttpServlet {
@@ -21,11 +21,10 @@ public class DriverRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080"); 
-        response.setHeader("Access-Control-Allow-Credentials", "true");  // ✅ Allow cookies/session
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         // Extract form data
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -33,13 +32,10 @@ public class DriverRegisterServlet extends HttpServlet {
         String contact = request.getParameter("contact");
         String workType = request.getParameter("workType");
         String workingArea = request.getParameter("workingArea");
-        String cabModel = request.getParameter("cabModel");
+        String cabModel = request.getParameter("cabModel");  // Cab Model (CabID)
         String licenseNo = request.getParameter("licenseNo");
 
-        System.out.println("Received Cab Model: " + cabModel);  // Add this line to debug
-        
-        
-        // Validate inputs (simple example, expand this validation as needed)
+        // Validate inputs
         if (name == null || email == null || password == null || contact == null || workType == null || workingArea == null || cabModel == null || licenseNo == null) {
             sendErrorResponse(response, "All fields are required.");
             return;
@@ -49,7 +45,7 @@ public class DriverRegisterServlet extends HttpServlet {
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt()); // Hash the password
 
         // Get the AssignedCabID from the cab model
-        Integer assignedCabID = getCabIDByModel(cabModel);
+        Integer assignedCabID = Integer.parseInt(cabModel); // Directly use the CabID received from the dropdown
         if (assignedCabID == null) {
             sendErrorResponse(response, "Invalid cab model selected.");
             return;
@@ -65,7 +61,7 @@ public class DriverRegisterServlet extends HttpServlet {
         driver.setWorkingArea(workingArea);
         driver.setAssignedCabID(assignedCabID); // Set the AssignedCabID from the dropdown
         driver.setLicenseNo(licenseNo);
-        driver.setStatus("Available"); // Status can be "Pending", "Approved", or "Inactive" based on your logic
+        driver.setStatus("Active"); // Status can be "Pending", "Approved", or "Inactive"
 
         // Insert data into the database
         if (insertDriverData(driver)) {
@@ -76,21 +72,6 @@ public class DriverRegisterServlet extends HttpServlet {
         } else {
             sendErrorResponse(response, "Failed to register driver. Please try again.");
         }
-    }
-
-    private Integer getCabIDByModel(String cabModel) {
-        String sql = "SELECT CabID FROM Cab WHERE Model = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, cabModel);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("CabID");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null; // Return null if no matching cab model is found
     }
 
     private boolean insertDriverData(Driver driver) {
